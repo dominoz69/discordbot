@@ -1,27 +1,146 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ title }}</title>
+    <title>Discord Bot Invite</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
             background-color: #36393f;
             color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 600px;
+            background-color: #2f3136;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 {
             color: #7289da;
+            margin-top: 0;
+            font-size: 28px;
+            border-bottom: 2px solid #40444b;
+            padding-bottom: 15px;
+        }
+        .input-group {
+            margin: 25px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #b9bbbe;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            background-color: #40444b;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: box-shadow 0.3s;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #7289da;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #7289da;
+            color: white;
+            padding: 12px 24px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:hover {
+            background-color: #5b6eae;
+        }
+        .btn:active {
+            transform: scale(0.98);
+        }
+        #generate-btn {
+            background-color: #43b581;
+            width: 100%;
+        }
+        #generate-btn:hover {
+            background-color: #3ca374;
+        }
+        #invite-section {
+            margin-top: 25px;
+            text-align: center;
+        }
+        #invite-link {
+            background-color: #7289da;
+            display: inline-block;
+            width: auto;
+            padding: 14px 28px;
+            font-size: 18px;
+        }
+        .discord-logo {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Discord Bot Management Interface</h1>
-        <p>Bot is currently running. Use <code>@help</code> in Discord to see available commands.</p>
+        <h1>Discord Bot Invite</h1>
+
+        <div class="input-group">
+            <label for="client-id">Bot Client ID:</label>
+            <input type="text" id="client-id" placeholder="Enter your bot's client ID">
+        </div>
+
+        <button class="btn" id="generate-btn" onclick="generateInviteLink()">Generate Invite Link</button>
+
+        <div id="invite-section" style="display: none;">
+            <p>Your bot invite link is ready:</p>
+            <a id="invite-link" href="#" target="_blank" class="btn">
+                <svg class="discord-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.39-.444.885-.608 1.283a18.566 18.566 0 0 0-5.487 0c-.164-.398-.397-.893-.608-1.283a.077.077 0 0 0-.079-.036c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055c1.968 1.42 3.873 2.282 5.744 2.85a.078.078 0 0 0 .084-.027c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104-.665-.25-1.29-.55-1.9-.893a.076.076 0 0 1-.008-.125c.128-.095.255-.193.377-.292a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.122.099.25.198.377.293a.076.076 0 0 1-.006.125c-.61.344-1.235.645-1.9.894a.077.077 0 0 0-.041.103c.36.687.772 1.343 1.225 1.963a.077.077 0 0 0 .084.028c1.883-.569 3.788-1.43 5.756-2.85a.08.08 0 0 0 .03-.055c.5-5.094-.838-9.52-3.549-13.442a.062.062 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"></path>
+                </svg>
+                Invite to Server
+            </a>
+        </div>
     </div>
+
+    <script>
+        function generateInviteLink() {
+            const clientId = document.getElementById('client-id').value;
+            if (!clientId) {
+                alert("Please enter your bot's client ID!");
+                return;
+            }
+
+            // Using standard permissions for a basic bot
+            const permissions = "274878282816";
+
+            const inviteUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&permissions=${permissions}&scope=bot%20applications.commands`;
+
+            document.getElementById('invite-link').href = inviteUrl;
+            document.getElementById('invite-section').style.display = 'block';
+        }
+    </script>
 </body>
 </html>
