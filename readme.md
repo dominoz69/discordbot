@@ -11,7 +11,7 @@ Your bot uses the following environment variables:
 - `ADMIN`: Discord user ID of the bot administrator
 - `MONGO_URI`: Connection string for your MongoDB database
 
-## Step 1: Create a `.env` File
+## Create a `.env` File
 
 Create a file named `.env` in the root directory of your project:
 
@@ -22,23 +22,6 @@ ADMIN=your_discord_user_id
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
 ```
 
-## Step 2: Load Environment Variables in Your Bot
-
-Add this code to your bot to load the environment variables:
-
-```python
-import os
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Access environment variables
-TOKEN = os.getenv('TOKEN')
-PREFIX = os.getenv('PREFIX')
-ADMIN = os.getenv('ADMIN')
-MONGO_URI = os.getenv('MONGO_URI')
-```
 
 ## How to Get a Discord Bot Token
 
