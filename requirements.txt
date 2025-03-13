@@ -1,0 +1,10 @@
+discord.py
+discord
+flask
+flask-sqlalchemy
+python-dotenv
+gunicorn
+psutil
+colorama
+pynacl
+asyncpg
