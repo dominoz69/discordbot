@@ -1,45 +1,30 @@
-import asyncpg
+import motor.motor_asyncio
 import os
 import logging
-from config import load_config
+from dotenv import load_dotenv
+
+load_dotenv()
 
 async def init_db():
-    """Initialize database connection and create tables if they don't exist"""
-    config = load_config()['database']
-    
+    mongo_uri = os.getenv('MONGO_URI')
+
     try:
-        conn = await asyncpg.connect(
-            host=config['host'],
-            port=config['port'],
-            database=config['database'],
-            user=config['user'],
-            password=config['password']
-        )
-        
-        # Create tables
-        await conn.execute('''
-            CREATE TABLE IF NOT EXISTS users (
-                user_id BIGINT PRIMARY KEY,
-                username VARCHAR(100) NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
-        ''')
-        
-        await conn.close()
+        client = motor.motor_asyncio.AsyncIOMotorClient(mongo_uri)
+        db = client.get_default_database()
+
+        collection_names = await db.list_collection_names()
+        if 'users' not in collection_names:
+            await db.create_collection('users')
+
         logging.info("Database initialized successfully")
-        
+        return client
+
     except Exception as e:
         logging.error(f"Database initialization failed: {str(e)}")
         raise
 
-async def get_pool():
-    """Get connection pool for database operations"""
-    config = load_config()['database']
-    
-    return await asyncpg.create_pool(
-        host=config['host'],
-        port=config['port'],
-        database=config['database'],
-        user=config['user'],
-        password=config['password']
-    )
+async def get_db():
+    mongo_uri = os.getenv('MONGO_URI')
+
+    client = motor.motor_asyncio.AsyncIOMotorClient(mongo_uri)
+    return client.get_default_database()

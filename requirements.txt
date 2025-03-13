@@ -8,3 +8,4 @@ psutil
 colorama
 pynacl
 asyncpg
+motor
