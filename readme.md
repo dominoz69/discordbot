@@ -62,7 +62,7 @@ MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
 With the environment variables configured, you can now run your bot:
 
 ```bash
-python bot.py
+python main.py
 ```
 
 ## Security Best Practices
